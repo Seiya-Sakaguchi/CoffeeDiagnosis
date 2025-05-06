@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>コーヒー診断アプリ</title>
+	<meta charset="UTF-8">
+	<title>コーヒー診断アプリ</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
 </head>
+
 <body>
-	<h1></h1>
-	<h2></h2>
-	<p></p>
+             <!-- 質問２回答確認用 -->
 	<%
         String scene = (String) session.getAttribute("scene");
         String flavor = (String) session.getAttribute("flavor");
@@ -20,13 +20,19 @@
         <li>シチュエーション = <strong><%= scene %></strong></li>
         <li>風味の好み = <strong><%= flavor %></strong></li>
     </ul>
-	
-	<form action="<%= request.getContextPath() %>/DiagnosisLogicServlet" method="post">
-		<input type="radio" name="temperature" value="ホット" required>ホット<br>
-		<input type="radio" name="temperature" value="アイス">アイス<br>
-		
-		<button type="submit">診断結果</button>
-	
-	</form>
+    
+	<main>
+    	<h2>ホットかアイスのどちらがお好みですか？</h2>
+	    	<form action="<%= request.getContextPath() %>/DiagnosisLogicServlet" method="post">
+	     		<div class="radio-group">
+	        		<input type="radio" id="hot" name="temperature" value="ホット" required>
+	        		<label for="hot">ホット</label>
+	        		<input type="radio" id="ice" name="temperature" value="アイス">
+	        		<label for="ice">アイス</label>
+	      		</div>
+	      		<button type="submit">診断する</button>
+	    	</form>
+	</main>
 </body>
+
 </html>

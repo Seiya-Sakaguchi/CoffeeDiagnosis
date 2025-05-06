@@ -6,19 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>コーヒー診断アプリ</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
+
 </head>
 <body>
-	<h1></h1>
-	<h2></h2>
-	<p></p>
-	<form action="<%= request.getContextPath() %>/CoffeeDiagnosisServlet" method="post">
-		<input type="radio" name="scene" value="朝" required>朝<br>
-		<input type="radio" name="scene" value="仕事中">仕事中<br>
-		<input type="radio" name="scene" value="リラックスタイム">リラックスタイム<br><br>
-		
-		<input type="hidden" name="step" value="2">
-		<button type="submit">次へ</button>
-	
-	</form>
+	<main>
+ 		<h2>コーヒーを飲むシュチュエーションを教えてください</h2>
+  			<form action="CoffeeDiagnosisServlet" method="post">
+   				<div class="radio-group">
+     					<input type="radio" id="morning" name="scene" value="朝" required>
+     					<label for="morning">朝</label>
+     					<input type="radio" id="work" name="scene" value="仕事中">
+     					<label for="work">仕事中</label>
+     					<input type="radio" id="relax" name="scene" value="リラックスタイム">
+     					<label for="relax">リラックスタイム</label>
+   				</div>
+    			<input type="hidden" name="step" value="2">
+    			<button type="submit">次へ</button>
+  			</form>
+	</main>	
 </body>
 </html>

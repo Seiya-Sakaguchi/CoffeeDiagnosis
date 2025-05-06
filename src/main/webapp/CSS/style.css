@@ -1,0 +1,102 @@
+/* フォントと背景設定 */
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #f5f0e6;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;     /* 横方向中央 */
+    align-items: center;         /* 縦方向中央 */
+    min-height: 100vh;           /* 画面高さに合わせる */
+    box-sizing: border-box;
+}
+/* トップページ説明 */
+header {
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+/* 全体ラップ */
+.main-container {
+    width: 100%;
+    max-width: 720px;
+    padding: 30px;
+}
+
+/* トップページタイトル */
+h1 {
+    color: #6e4c2f;
+    text-align: center;
+	font-size: 4rem;
+	padding: 2rem;
+}
+/* 質問ページタイトル */
+h2 {
+	color: #6e4c2f;
+	text-align: center;
+}
+h3 {
+	color: #6e4c2f;
+	text-align: center;
+	font-size: 3rem;
+	padding: 1rem;
+}
+/* アンケートボックスデザイン */
+main {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ラジオボタンカード */
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+.radio-group label {
+    flex: 1 1 calc(50% - 15px);
+    text-align: center;
+    padding: 14px 10px;
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.radio-group input[type="radio"]:checked + label {
+    background-color: #4d6a50;
+    color: #ffffff;
+    border-color: #4d6a50;
+    box-shadow: 0 0 8px rgba(77,106,80,0.6);
+}
+
+/* ボタン */
+button {
+    background-color: #6e4c2f;
+    color: #fff;
+    border: none;
+    padding: 1.5rem;
+    margin-top: 5rem;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button:hover {
+    background-color: #8a5f3e;
+}

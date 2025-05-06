@@ -21,11 +21,10 @@
         <li>風味の好み = <strong><%= flavor %></strong></li>
     </ul>
 	
-	<form action="<%= request.getContextPath() %>/CoffeeDiagnosisServlet" method="post">
+	<form action="<%= request.getContextPath() %>/DiagnosisLogicServlet" method="post">
 		<input type="radio" name="temperature" value="ホット" required>ホット<br>
 		<input type="radio" name="temperature" value="アイス">アイス<br>
 		
-		<input type="hidden" name="step" value="4">
 		<button type="submit">診断結果</button>
 	
 	</form>

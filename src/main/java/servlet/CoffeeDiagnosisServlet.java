@@ -42,16 +42,7 @@ public class CoffeeDiagnosisServlet extends HttpServlet {
 
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/question3.jsp");
             rd.forward(request, response);
-
-        } else if ("4".equals(step)) {
-            // Q3の回答（temperature）を保存し、結果へ
-            String temp = request.getParameter("temperature");
-            session.setAttribute("temperature", temp);
-
-            // ※ここで診断ロジックを呼び出し、結果を計算する処理を後で追加
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/result.jsp");
-            rd.forward(request, response);
-
+            
         } else {
             // 想定外のstep → エラー画面やトップへリダイレクト
             response.sendRedirect("TOP_JSP/index.jsp");

@@ -10,6 +10,10 @@ body {
     align-items: center;         /* 縦方向中央 */
     min-height: 100vh;           /* 画面高さに合わせる */
     box-sizing: border-box;
+	display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
 }
 /* トップページ説明 */
 header {
@@ -44,7 +48,9 @@ h3 {
 }
 /* アンケートボックスデザイン */
 main {
-    padding: 20px;
+	width: 80%;
+    max-width: 720px;
+    padding: 30px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);

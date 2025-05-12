@@ -1,4 +1,4 @@
 /build/
 .DS_Store
-src/main/webapp/DATA/
-src/main/webapp/WEB-INF/lib/
+# src/main/webapp/DATA/
+# src/main/webapp/WEB-INF/lib/

@@ -114,3 +114,5 @@ public class DiagnosisLogicServlet extends HttpServlet {
         rd.forward(request, response);
     }
 }
+
+

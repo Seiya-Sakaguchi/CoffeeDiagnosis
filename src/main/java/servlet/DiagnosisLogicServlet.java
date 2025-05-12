@@ -1,8 +1,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,109 +13,52 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.CoffeeAnswer;
+import model.CoffeeProfile;
 
 @WebServlet("/DiagnosisLogicServlet")
 public class DiagnosisLogicServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        
-        String temperature = request.getParameter("temperature");
-        session.setAttribute("temperature", temperature);
 
-        // セッションから回答を取得
-        String scene = (String) session.getAttribute("scene");
-        String flavor = (String) session.getAttribute("flavor");
-        String temp = (String) session.getAttribute("temperature");
-        System.out.println(scene + flavor + temp);
+        // ユーザー回答を CoffeeAnswer に格納
+        String scene = request.getParameter("scene");
+        String flavor = request.getParameter("flavor");
+        String temp = request.getParameter("temperature");
 
-        String key = scene + "-" + flavor + "-" + temperature;
-        String coffeeName;
+        CoffeeAnswer answer = new CoffeeAnswer();
+        answer.setScene(scene);
+        answer.setFlavor(flavor);
+        answer.setTemperature(temp);
 
-        switch (key) {
-            case "朝-フルーティ-ホット":
-                coffeeName = "コスタリカ";
-                break;
-            case "朝-フルーティ-アイス":
-                coffeeName = "ケニア";
-                break;
-            case "朝-スイート-ホット":
-                coffeeName = "タンザニア";
-                break;
-            case "朝-スイート-アイス":
-                coffeeName = "グァテマラ";
-                break;
-            case "朝-ビター-ホット":
-                coffeeName = "コロンビア";
-                break;
-            case "朝-ビター-アイス":
-                coffeeName = "ルワンダ";
-                break;
-            case "朝-ナッティ-ホット":
-                coffeeName = "ブラジル";
-                break;
-            case "朝-ナッティ-アイス":
-                coffeeName = "メキシコ";
-                break;
-            case "仕事中-フルーティ-ホット":
-                coffeeName = "エチオピア（ウォッシュド）";
-                break;
-            case "仕事中-フルーティ-アイス":
-                coffeeName = "ドミニカ";
-                break;
-            case "仕事中-スイート-ホット":
-                coffeeName = "グァテマラ";
-                break;
-            case "仕事中-スイート-アイス":
-                coffeeName = "ブラジル";
-                break;
-            case "仕事中-ビター-ホット":
-                coffeeName = "マンデリン";
-                break;
-            case "仕事中-ビター-アイス":
-                coffeeName = "コロンビア";
-                break;
-            case "仕事中-ナッティ-ホット":
-                coffeeName = "ブラジル";
-                break;
-            case "仕事中-ナッティ-アイス":
-                coffeeName = "ペルー";
-                break;
-            case "リラックスタイム-フルーティ-ホット":
-                coffeeName = "エチオピア（ナチュラル）";
-                break;
-            case "リラックスタイム-フルーティ-アイス":
-                coffeeName = "タンザニア（キリマンジャロ）";
-                break;
-            case "リラックスタイム-スイート-ホット":
-                coffeeName = "モカ・マタリ（イエメン）";
-                break;
-            case "リラックスタイム-スイート-アイス":
-                coffeeName = "パナマ（ハニープロセス）";
-                break;
-            case "リラックスタイム-ビター-ホット":
-                coffeeName = "ブルーマウンテン";
-                break;
-            case "リラックスタイム-ビター-アイス":
-                coffeeName = "インドネシア（トラジャ）";
-                break;
-            case "リラックスタイム-ナッティ-ホット":
-                coffeeName = "ハワイコナ";
-                break;
-            case "リラックスタイム-ナッティ-アイス":
-                coffeeName = "パプアニューギニア";
-                break;
-            default:
-                coffeeName = "おすすめが見つかりませんでした";
-        }
+        // セッションに保持（戻る機能などで使用）
+        session.setAttribute("answer", answer);
 
-        // 結果をリクエストに格納し、JSPへ
-        request.setAttribute("coffeeName", coffeeName);
+        // キーを生成（例: m-f-h）
+        String key = scene + "-" + flavor + "-" + temp;
+
+        // JSONファイルの読み込み
+        ServletContext context = getServletContext();
+        InputStream is = context.getResourceAsStream("/DATA/coffeeData.json");
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, CoffeeProfile> profileMap = mapper.readValue(
+            is, new TypeReference<Map<String, CoffeeProfile>>() {}
+        );
+
+        // 対応するコーヒープロフィールを取得
+        CoffeeProfile profile = profileMap.get(key);
+
+        // JSPに表示用としてセット
+        request.setAttribute("coffeeProfile", profile);
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/result.jsp");
         rd.forward(request, response);
     }
 }
-
-

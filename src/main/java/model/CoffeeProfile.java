@@ -2,11 +2,11 @@ package model;
 
 public class CoffeeProfile {
 	private String name;
-	private String region;
-	private String altitude;
+	private String origin;
+	private String elevation;
 	private String process;
-	private String variety;
-	private String description;
+	private String varieties;
+	private String flavor_notes;
 	
 	
 	public CoffeeProfile() {}
@@ -14,18 +14,18 @@ public class CoffeeProfile {
 	public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getRegion() { return region; }
-    public void setRegion(String region) { this.region = region; }
+    public String getOrigin() { return origin; }
+    public void setOrigin(String origin) { this.origin = origin; }
 
-    public String getAltitude() { return altitude; }
-    public void setAltitude(String altitude) { this.altitude = altitude; }
+    public String getElevation() { return elevation; }
+    public void setElevation(String elevation) { this.elevation = elevation; }
 
     public String getProcess() { return process; }
     public void setProcess(String process) { this.process = process; }
 
-    public String getVariety() { return variety; }
-    public void setVariety(String variety) { this.variety = variety; }
+    public String getVarieties() { return varieties; }
+    public void setVarieties(String varieties) { this.varieties = varieties; }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getFlavor_notes() { return flavor_notes; }
+    public void setFlavor_notes(String flavor_notes) { this.flavor_notes = flavor_notes; }
 }

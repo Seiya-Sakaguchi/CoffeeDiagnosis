@@ -28,21 +28,22 @@ public class DiagnosisLogicServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
 
-        // ユーザー回答を CoffeeAnswer に格納
-        String scene = request.getParameter("scene");
-        String flavor = request.getParameter("flavor");
-        String temp = request.getParameter("temperature");
-
+        String temperature = request.getParameter("temperature");
+        session.setAttribute("temperature", temperature);
+        
+        String scene = (String) session.getAttribute("scene");
+        String flavor = (String) session.getAttribute("flavor");
+        
         CoffeeAnswer answer = new CoffeeAnswer();
         answer.setScene(scene);
         answer.setFlavor(flavor);
-        answer.setTemperature(temp);
-
+        answer.setTemperature(temperature);
+       
         // セッションに保持（戻る機能などで使用）
         session.setAttribute("answer", answer);
-
+        
         // キーを生成（例: m-f-h）
-        String key = scene + "-" + flavor + "-" + temp;
+        String key = scene + "-" + flavor + "-" + temperature;
 
         // JSONファイルの読み込み
         ServletContext context = getServletContext();
@@ -58,17 +59,7 @@ public class DiagnosisLogicServlet extends HttpServlet {
 
         // JSPに表示用としてセット
         request.setAttribute("coffeeProfile", profile);
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/test.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/result.jsp");
         rd.forward(request, response);
-        
-
-        if (answer != null) {
-            System.out.println("【セッション確認】");
-            System.out.println("scene: " + answer.getScene());
-            System.out.println("flavor: " + answer.getFlavor());
-            System.out.println("temperature: " + answer.getTemperature());
-            System.out.println("name: " + profile.getName());
-        }
-
     }
 }

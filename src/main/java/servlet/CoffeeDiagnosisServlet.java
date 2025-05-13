@@ -19,7 +19,6 @@ public class CoffeeDiagnosisServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String step = request.getParameter("step");
-        System.out.println("受け取ったstep: " + step);
 
         
         if ("1".equals(step)) {

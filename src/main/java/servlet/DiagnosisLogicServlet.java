@@ -58,7 +58,17 @@ public class DiagnosisLogicServlet extends HttpServlet {
 
         // JSPに表示用としてセット
         request.setAttribute("coffeeProfile", profile);
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/result.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/test.jsp");
         rd.forward(request, response);
+        
+
+        if (answer != null) {
+            System.out.println("【セッション確認】");
+            System.out.println("scene: " + answer.getScene());
+            System.out.println("flavor: " + answer.getFlavor());
+            System.out.println("temperature: " + answer.getTemperature());
+            System.out.println("name: " + profile.getName());
+        }
+
     }
 }

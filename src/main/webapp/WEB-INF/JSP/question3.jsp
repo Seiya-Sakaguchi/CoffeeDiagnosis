@@ -25,9 +25,9 @@
     	<h2>ホットかアイスのどちらがお好みですか？</h2>
 	    	<form action="<%= request.getContextPath() %>/DiagnosisLogicServlet" method="post">
 	     		<div class="radio-group">
-	        		<input type="radio" id="hot" name="temperature" value="ホット" required>
+	        		<input type="radio" id="hot" name="temperature" value="h" required>
 	        		<label for="hot">ホット</label>
-	        		<input type="radio" id="ice" name="temperature" value="アイス">
+	        		<input type="radio" id="ice" name="temperature" value="i">
 	        		<label for="ice">アイス</label>
 	      		</div>
 	      		<button type="submit">診断する</button>

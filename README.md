@@ -1,4 +1,4 @@
-[DiagnosisSeq_rear.md](https://github.com/user-attachments/files/20326164/DiagnosisSeq_rear.md)[DiagnosisSeq_front.md](https://github.com/user-attachments/files/20326160/DiagnosisSeq_front.md)[DiagnosisApp_logic.md](https://github.com/user-attachments/files/20326154/DiagnosisApp_logic.md)[DiagnosisApp_frow.md](https://github.com/user-attachments/files/20326140/DiagnosisApp_frow.md)このアプリを起動する際は「index.jsp」からお願いします（/CoffeeDiagnosis/webapp/TOP_JSP/index.jsp）。
+このアプリを起動する際は「index.jsp」からお願いします（/CoffeeDiagnosis/webapp/TOP_JSP/index.jsp）。
 
 # コーヒー診断アプリ 要件定義書
 
@@ -94,7 +94,7 @@ top --> E
 result --> E
 
 ```
-[Uploading Diagnosi```mermaid
+```mermaid
 graph TD
 
 top(("index.jsp"))
@@ -123,8 +123,8 @@ C -->|step3とflavorをpost| A
 
 D -->|tempをpost| X
 
-```sApp_frow.md…]()
-[Uploading Diagno```mermaid
+```
+```mermaid
 graph TD
 
 subgraph Model
@@ -154,8 +154,8 @@ A .->|answerとprofile（マップ）を格納| Z
 A -->|リクエスト| D
 D .->|値の参照| Z
 D -->|もう一度診断を行う| X
-```sisApp_logic.md…]()
-[Uploading DiagnosisSeq_f```mermaid
+```
+```mermaid
 sequenceDiagram
 
 participant a as index.jsp
@@ -182,8 +182,8 @@ Note over e: ユーザーがtempを選択
 e ->>- g: tempをpost
 Note over g: ここからロジック処理層へ(別図に記載)
 Note over f: ここではsceneとflavorを保持する
-```ront.md…]()
-[Uploading DiagnosisSeq_```mermaid
+```
+```mermaid
 sequenceDiagram
 
 participant e as question3
@@ -215,7 +215,7 @@ opt 最初からやり直す
 end
 Note over h: もう一度診断を行う（前半パートへ）
 Note over f: scene,flavor,temp,answer,profileを保持
-```rear.md…]()
+```
 
 
 ![CoffeeDiagnosis_top](https://github.com/user-attachments/assets/341da896-f2aa-42b2-8af4-85f82dfb7891)

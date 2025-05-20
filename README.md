@@ -1,3 +1,8 @@
+このアプリを起動する際は「index.jsp」からお願いします（/CoffeeDiagnosis/webapp/TOP_JSP/index.jsp）。
+
+
+
+
 # CoffeeDiagnosis
 Coffee app
 ```mermaid

@@ -1,4 +1,4 @@
-このアプリを起動する際は「index.jsp」からお願いします（/CoffeeDiagnosis/webapp/TOP_JSP/index.jsp）。
+[DiagnosisSeq_rear.md](https://github.com/user-attachments/files/20326164/DiagnosisSeq_rear.md)[DiagnosisSeq_front.md](https://github.com/user-attachments/files/20326160/DiagnosisSeq_front.md)[DiagnosisApp_logic.md](https://github.com/user-attachments/files/20326154/DiagnosisApp_logic.md)[DiagnosisApp_frow.md](https://github.com/user-attachments/files/20326140/DiagnosisApp_frow.md)このアプリを起動する際は「index.jsp」からお願いします（/CoffeeDiagnosis/webapp/TOP_JSP/index.jsp）。
 
 # コーヒー診断アプリ 要件定義書
 
@@ -94,6 +94,129 @@ top --> E
 result --> E
 
 ```
+[Uploading Diagnosi```mermaid
+graph TD
+
+top(("index.jsp"))
+
+subgraph Control
+A["CoffeeDiagnosisServlet.java"]
+end
+subgraph Scope
+Z("Session Scope")
+end
+subgraph View
+B(("question1"))
+C(("question2"))
+D(("qestion3"))
+end
+subgraph 後半の処理へ
+X["DiagnosisLogicServlet.java"]
+end
+top -->|step1をpost| A
+A -->|リクエスト| B
+A -->|リクエスト| C
+A -->|リクエスト| D
+A .->|スコープに格納| Z
+B -->|step2とsceneをpost| A
+C -->|step3とflavorをpost| A
+
+D -->|tempをpost| X
+
+```sApp_frow.md…]()
+[Uploading Diagno```mermaid
+graph TD
+
+subgraph Model
+B{CoffeeAnswer.java}
+C{CoffeeProfile.java}
+end
+subgraph Control main
+A[DiagnosisLogicServlet.java]
+end
+subgraph Scope
+Z(Session Scope)
+end
+subgraph View
+D((result.jsp))
+end
+subgraph 前半処理へ
+X((question1))
+end
+Y(cofeeData.json)
+
+A -->|キーから該当のコーヒーのプロフィールを取得| Y
+A -->|answerインスタンスの生成| B
+A -->|profileインスタンスの生成| C
+A .->|answerとprofile（マップ）を格納| Z
+
+
+A -->|リクエスト| D
+D .->|値の参照| Z
+D -->|もう一度診断を行う| X
+```sisApp_logic.md…]()
+[Uploading DiagnosisSeq_f```mermaid
+sequenceDiagram
+
+participant a as index.jsp
+participant b as CoffeeDiagnosisServlet.java
+participant c as question1.jsp
+participant d as question2.jsp
+participant e as question3.jsp
+participant f as session
+participant g as DiagnosisLogicServret.java
+
+
+
+a ->> b: post
+b ->>+ c: リクエスト
+Note over c: ユーザーがsceneを選択
+c ->>- b: sceneをpost
+b ->> f: sceneを格納
+b ->>+ d: リクエスト
+Note over d: ユーザーがflavorを選択
+d ->>- b: flavorをpost
+b ->> f: flavorを格納
+b ->>+ e: リクエスト
+Note over e: ユーザーがtempを選択
+e ->>- g: tempをpost
+Note over g: ここからロジック処理層へ(別図に記載)
+Note over f: ここではsceneとflavorを保持する
+```ront.md…]()
+[Uploading DiagnosisSeq_```mermaid
+sequenceDiagram
+
+participant e as question3
+participant a as DiagnosisLogicServlet.java
+participant b as CoffeeAnswer.java
+participant c as CoffeeProfile.java
+
+participant f as session
+participant g as coffeeData.json
+participant d as result.jsp
+participant h as question1
+
+e ->> a: tempをpost
+a -->> f: 参照（）
+Note over a: scene,flavor,temp
+a ->> b: Anwerインスタンスの生成
+Note over a: scene,flavor,tempをanswerとしてまとめる
+a -->> f: answerを格納
+Note over a: answerをキーにする
+a ->> g: キーに適合するデータを取得
+Note over a: mapperに代入
+a ->> c: Profileインスタンスの生成
+a -->> f: profileを格納
+a ->>+ d: 結果表示のリクエスト
+d -->> f: profileの参照
+Note over d: 診断結果の表示
+opt 最初からやり直す
+    d ->>- h: 再診断（post）
+end
+Note over h: もう一度診断を行う（前半パートへ）
+Note over f: scene,flavor,temp,answer,profileを保持
+```rear.md…]()
+
 
 ![CoffeeDiagnosis_top](https://github.com/user-attachments/assets/341da896-f2aa-42b2-8af4-85f82dfb7891)
 ![CoffeeDiagnosis_question1](https://github.com/user-attachments/assets/af83974a-a219-4c2d-a986-d722e1255f11)
